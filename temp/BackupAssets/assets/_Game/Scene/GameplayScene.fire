@@ -900,55 +900,55 @@
     "_enabled": true,
     "pools": [
       {
+        "amount": 0,
         "root": {
           "__id__": 12
         },
-        "amount": 0,
         "prefab": {
           "__uuid__": "d2dd6ee9-99c0-498b-abf9-d5ca8155c412"
         }
       },
       {
+        "amount": 0,
         "root": {
           "__id__": 13
         },
-        "amount": 0,
         "prefab": {
           "__uuid__": "0f1f83e0-a646-4f02-809a-687aee791ade"
         }
       },
       {
+        "amount": 0,
         "root": {
           "__id__": 14
         },
-        "amount": 0,
         "prefab": {
           "__uuid__": "3b7d04b1-e9d8-42b9-baf4-0cdd0aafac8b"
         }
       },
       {
+        "amount": 0,
         "root": {
           "__id__": 15
         },
-        "amount": 0,
         "prefab": {
           "__uuid__": "824c2d75-af72-4ec1-ae81-2427f5758cc1"
         }
       },
       {
+        "amount": 0,
         "root": {
           "__id__": 16
         },
-        "amount": 0,
         "prefab": {
           "__uuid__": "3949bde2-bfdc-4edf-b83b-1bdabaff4a6c"
         }
       },
       {
+        "amount": 0,
         "root": {
           "__id__": 13
         },
-        "amount": 0,
         "prefab": {
           "__uuid__": "7072866b-7de3-4eac-ae04-b95b40498ceb"
         }

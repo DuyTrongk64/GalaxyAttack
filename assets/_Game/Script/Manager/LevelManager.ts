@@ -89,6 +89,7 @@ export default class LevelManager extends cc.Component {
    onFinish() {
       //kết thúc màn game di chuyển tàu lên thẳng phía trên
       this.ship.onFinish();
+      this.stage++;
       //show UI end card
    }
 
@@ -113,23 +114,40 @@ export default class LevelManager extends cc.Component {
       //nếu kết thúc stage thì next stage
       if(this.list.length == 0){
          this.stage++;
-         if(this.stage ==3){
+         if(this.stage == 3){
             this.level++;
-            
+            this.stage =0;
          }
-         switch(this.stage){
-            case 0:
-               this.onLoadStage_1();
-               break;
+         switch(this.level){
             case 1:
-               this.onLoadStage_2();
-               break;
-            default:
-               //kết thúc stage thì kết thúc game
-               this.onFinish();
-               this.waitAndExecute(()=>{this.onLoadStage_2_1()});
-               break;
+               switch(this.stage){
+                  case 0:
+                     this.onLoadStage_1();
+                     break;
+                  case 1:
+                     this.onLoadStage_2();
+                     break;
+                  default:
+                     //kết thúc stage thì kết thúc game
+                     this.onFinish();
+                     console.log(`state: ${this.stage}; level" ${this.level}`);
+                     break;
+               }
+            case 2:
+               switch(this.stage){
+                  case 0:
+                     this.onLoadStage_2_1();
+                     break;
+                  case 1:
+                     //this.onLoadStage_2();
+                     break;
+                  default:
+                     //kết thúc stage thì kết thúc game
+                     this.onFinish();
+                     break;
+               }
          }
+         
       }
 
       //enemy đầu tiên chết sẽ tạo booster ra

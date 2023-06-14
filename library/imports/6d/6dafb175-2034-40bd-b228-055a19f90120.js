@@ -97,6 +97,7 @@ var LevelManager = /** @class */ (function (_super) {
     LevelManager.prototype.onFinish = function () {
         //kết thúc màn game di chuyển tàu lên thẳng phía trên
         this.ship.onFinish();
+        this.stage++;
         //show UI end card
     };
     // Hàm chờ 3 giây
@@ -108,7 +109,6 @@ var LevelManager = /** @class */ (function (_super) {
     //enemy death sẽ gọi vào hàm này
     //nếu ship chết thì cần viết 1 func khác để ship gọi vào
     LevelManager.prototype.onEnemyDeath = function (c) {
-        var _this = this;
         //remove enemy ra khỏi list
         var index = this.list.indexOf(c);
         if (index != -1) {
@@ -119,19 +119,36 @@ var LevelManager = /** @class */ (function (_super) {
             this.stage++;
             if (this.stage == 3) {
                 this.level++;
+                this.stage = 0;
             }
-            switch (this.stage) {
-                case 0:
-                    this.onLoadStage_1();
-                    break;
+            switch (this.level) {
                 case 1:
-                    this.onLoadStage_2();
-                    break;
-                default:
-                    //kết thúc stage thì kết thúc game
-                    this.onFinish();
-                    this.waitAndExecute(function () { _this.onLoadStage_2_1(); });
-                    break;
+                    switch (this.stage) {
+                        case 0:
+                            this.onLoadStage_1();
+                            break;
+                        case 1:
+                            this.onLoadStage_2();
+                            break;
+                        default:
+                            //kết thúc stage thì kết thúc game
+                            this.onFinish();
+                            console.log("state: " + this.stage + "; level\" " + this.level);
+                            break;
+                    }
+                case 2:
+                    switch (this.stage) {
+                        case 0:
+                            this.onLoadStage_2_1();
+                            break;
+                        case 1:
+                            //this.onLoadStage_2();
+                            break;
+                        default:
+                            //kết thúc stage thì kết thúc game
+                            this.onFinish();
+                            break;
+                    }
             }
         }
         //enemy đầu tiên chết sẽ tạo booster ra
