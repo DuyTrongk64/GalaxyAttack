@@ -173,7 +173,7 @@ export default class Ship extends cc.Component {
   waitAndExecute(callback: () => void) {
     setTimeout(() => {
       callback(); // Gọi hàm callback sau khi chờ 3 giây
-    }, 3000);
+    }, 4000);
   }
 
   //hàm di chuyển sang vị trí mới

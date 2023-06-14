@@ -98,7 +98,7 @@ export default class LevelManager extends cc.Component {
    waitAndExecute(callback: () => void) {
       setTimeout(() => {
       callback(); // Gọi hàm callback sau khi chờ 3 giây
-      }, 3000);
+      }, 5000);
    }
 
    //enemy death sẽ gọi vào hàm này
@@ -130,6 +130,7 @@ export default class LevelManager extends cc.Component {
                   default:
                      //kết thúc stage thì kết thúc game
                      this.onFinish();
+                     this.waitAndExecute(()=>this.onLoadStage_2_1());
                      console.log(`state: ${this.stage}; level" ${this.level}`);
                      break;
                }

@@ -104,11 +104,12 @@ var LevelManager = /** @class */ (function (_super) {
     LevelManager.prototype.waitAndExecute = function (callback) {
         setTimeout(function () {
             callback(); // Gọi hàm callback sau khi chờ 3 giây
-        }, 3000);
+        }, 5000);
     };
     //enemy death sẽ gọi vào hàm này
     //nếu ship chết thì cần viết 1 func khác để ship gọi vào
     LevelManager.prototype.onEnemyDeath = function (c) {
+        var _this = this;
         //remove enemy ra khỏi list
         var index = this.list.indexOf(c);
         if (index != -1) {
@@ -133,6 +134,7 @@ var LevelManager = /** @class */ (function (_super) {
                         default:
                             //kết thúc stage thì kết thúc game
                             this.onFinish();
+                            this.waitAndExecute(function () { return _this.onLoadStage_2_1(); });
                             console.log("state: " + this.stage + "; level\" " + this.level);
                             break;
                     }

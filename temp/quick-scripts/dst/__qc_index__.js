@@ -19,6 +19,7 @@ require('./assets/_Game/Script/Manager/CollisionManager');
 require('./assets/_Game/Script/Manager/LevelManager');
 require('./assets/_Game/Script/Manager/SoundManager');
 require('./assets/_Game/Script/Manager/UIManager');
+require('./assets/_Game/Script/PlayBtn');
 require('./assets/_Game/Script/Pool/PoolControl');
 require('./assets/_Game/Script/Pool/PoolMember');
 require('./assets/_Game/Script/Pool/SimplePool');

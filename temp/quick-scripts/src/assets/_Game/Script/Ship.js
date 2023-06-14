@@ -147,7 +147,7 @@ var Ship = /** @class */ (function (_super) {
     Ship.prototype.waitAndExecute = function (callback) {
         setTimeout(function () {
             callback(); // Gọi hàm callback sau khi chờ 3 giây
-        }, 3000);
+        }, 4000);
     };
     //hàm di chuyển sang vị trí mới
     Ship.prototype.moveTo = function (target, duration, doneAction, isWorldSpace) {
