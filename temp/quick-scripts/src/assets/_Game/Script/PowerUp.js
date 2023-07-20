@@ -37,7 +37,6 @@ var PowerUp = /** @class */ (function (_super) {
     __extends(PowerUp, _super);
     function PowerUp() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        //script này copy của Khánh cho nhanh, mà hình như ô Khánh này copy của ChatGPT hay sao mà tự dưng nhìn comment chuẩn chỉ thế
         _this.speed = 500;
         _this.time = 0;
         _this.threshold = 20;

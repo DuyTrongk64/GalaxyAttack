@@ -120,7 +120,7 @@ export default class Ship extends cc.Component {
 
   public onPowerUp(): void {
     this.bulletPoints = this.bulletPoints_2;
-    this.shield.active = true;
+    //this.shield.active = true;
     SoundManager.Ins.PlayClip(AudioType.FX_Booster);
   }
 
@@ -166,7 +166,7 @@ export default class Ship extends cc.Component {
     ()=> UIManager.Ins.onOpen(1) 
     ,false)
     ,false);
-    this.waitAndExecute(()=>this.onNextRound());
+    //this.waitAndExecute(()=>this.onNextRound());
   }
 
   // Hàm chờ 3 giây

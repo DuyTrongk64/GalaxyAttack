@@ -10,15 +10,14 @@ import Enemy from "../Enemy";
 import SimplePool, { PoolType } from "../Pool/SimplePool";
 import Ship from "../Ship";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class LevelManager extends cc.Component {
 
    // singleton
-   private static ins : LevelManager;
-   public static get Ins() : LevelManager
-   {
+   private static ins: LevelManager;
+   public static get Ins(): LevelManager {
       return LevelManager.ins;
    }
 
@@ -31,10 +30,10 @@ export default class LevelManager extends cc.Component {
 
    @property(Ship)
    public ship: Ship = null;
-   
+
    @property(cc.Node)
    public stage_1: cc.Node[] = [];
-   
+
    @property(cc.Node)
    public stage_2: cc.Node[] = [];
 
@@ -63,14 +62,14 @@ export default class LevelManager extends cc.Component {
    public onLoadStage_2(): void {
       //bay từ 2 bên sang
       for (let i = 0; i < 14; i++) {
-         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(-1000,0,0)), 0);
+         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_1, this.node.getWorldPosition().add(new cc.Vec3(-1000, 0, 0)), 0);
          e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
          this.list.push(e);
          e.onInit(40);
       }
 
       for (let i = 13; i < this.stage_2.length; i++) {
-         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(1000,0,0)), 0);
+         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_1, this.node.getWorldPosition().add(new cc.Vec3(1000, 0, 0)), 0);
          e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
          this.list.push(e);
          e.onInit(40);
@@ -86,24 +85,94 @@ export default class LevelManager extends cc.Component {
       }
    }
 
+   public onLoadStage_2_2(): void {
+      //bay từ 2 bên sang
+      for (let i = 0; i < 14; i++) {
+         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(-1000, 0, 0)), 0);
+         e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+         this.list.push(e);
+         e.onInit(40);
+      }
+
+      for (let i = 13; i < this.stage_2.length; i++) {
+         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(1000, 0, 0)), 0);
+         e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+         this.list.push(e);
+         e.onInit(40);
+      }
+   }
+
+   public onLoadStage_3_1(): void {
+      for (let i = 0; i < this.stage_1.length; i++) {
+         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_1, this.stage_1[i].getWorldPosition().add(cc.Vec3.UP.mul(1000)), 0);
+         e.moveTo(this.stage_1[i].getWorldPosition(), 1, true);
+         this.list.push(e);
+         e.onInit(40);
+      }
+   }
+
+   public onLoadStage_3_2(): void {
+      //bay từ 2 bên sang
+      for (let i = 0; i < 14; i++) {
+         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_1, this.node.getWorldPosition().add(new cc.Vec3(-1000, 0, 0)), 0);
+         e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+         this.list.push(e);
+         e.onInit(40);
+      }
+
+      for (let i = 13; i < this.stage_2.length; i++) {
+         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(1000, 0, 0)), 0);
+         e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+         this.list.push(e);
+         e.onInit(40);
+      }
+
+
+   }
+
+   public onLoadStage_4_1(): void {
+      for (let i = 0; i < this.stage_1.length; i++) {
+         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_2, this.stage_1[i].getWorldPosition().add(cc.Vec3.UP.mul(1000)), 0);
+         e.moveTo(this.stage_1[i].getWorldPosition(), 1, true);
+         this.list.push(e);
+         e.onInit(40);
+      }
+   }
+
+   public onLoadStage_4_2(): void {
+      //bay từ 2 bên sang
+      for (let i = 0; i < 14; i++) {
+         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(-1000, 0, 0)), 0);
+         e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+         this.list.push(e);
+         e.onInit(40);
+      }
+
+      for (let i = 13; i < this.stage_2.length; i++) {
+         let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_1, this.node.getWorldPosition().add(new cc.Vec3(1000, 0, 0)), 0);
+         e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+         this.list.push(e);
+         e.onInit(40);
+      }
+   }
    onFinish() {
       //kết thúc màn game di chuyển tàu lên thẳng phía trên
       this.ship.onFinish();
       this.stage++;
-      //show UI end card
    }
 
-   
+
    // Hàm chờ 3 giây
    waitAndExecute(callback: () => void) {
       setTimeout(() => {
-      callback(); // Gọi hàm callback sau khi chờ 3 giây
+         callback(); // Gọi hàm callback sau khi chờ 3 giây
       }, 5000);
    }
 
+
    //enemy death sẽ gọi vào hàm này
    //nếu ship chết thì cần viết 1 func khác để ship gọi vào
-   public onEnemyDeath(c: Character): void{
+   public onEnemyDeath(c: Character): void {
 
       //remove enemy ra khỏi list
       let index = this.list.indexOf(c);
@@ -112,47 +181,41 @@ export default class LevelManager extends cc.Component {
       }
 
       //nếu kết thúc stage thì next stage
-      if(this.list.length == 0){
+      if (this.list.length == 0) {
          this.stage++;
-         if(this.stage == 3){
-            this.level++;
-            this.stage =0;
-         }
-         switch(this.level){
+         switch (this.stage) {
+            case 0:
+               this.onLoadStage_1();
+               break;
             case 1:
-               switch(this.stage){
-                  case 0:
-                     this.onLoadStage_1();
-                     break;
-                  case 1:
-                     this.onLoadStage_2();
-                     break;
-                  default:
-                     //kết thúc stage thì kết thúc game
-                     this.onFinish();
-                     this.waitAndExecute(()=>this.onLoadStage_2_1());
-                     console.log(`state: ${this.stage}; level" ${this.level}`);
-                     break;
-               }
+               this.onLoadStage_2();
+               break;
             case 2:
-               switch(this.stage){
-                  case 0:
-                     this.onLoadStage_2_1();
-                     break;
-                  case 1:
-                     //this.onLoadStage_2();
-                     break;
-                  default:
-                     //kết thúc stage thì kết thúc game
-                     this.onFinish();
-                     break;
-               }
-         }
-         
-      }
+               this.onLoadStage_2_1();
+               break;
+            case 3:
+               this.onLoadStage_2_2();
+               break;
+            case 4:
+               this.onLoadStage_3_1();
+               break;
+            case 5:
+               this.onLoadStage_3_2();
+               break;
+            case 6:
+               this.onLoadStage_4_1();
+               break;
+            case 7:
+               this.onLoadStage_4_2();
+               this.waitAndExecute(() => this.onFinish());
 
+               break;
+         }
+
+      }
+      //if(this.stage>4) this.stage = 0;
       //enemy đầu tiên chết sẽ tạo booster ra
-      if(!this.isBooster){
+      if (!this.isBooster) {
          this.isBooster = true;
          SimplePool.spawn(PoolType.Booster, c.node.getWorldPosition());
       }

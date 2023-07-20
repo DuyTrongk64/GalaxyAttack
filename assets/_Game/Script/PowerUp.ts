@@ -14,7 +14,6 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class PowerUp extends PoolMember {
 
-    //script này copy của Khánh cho nhanh, mà hình như ô Khánh này copy của ChatGPT hay sao mà tự dưng nhìn comment chuẩn chỉ thế
     private speed: number = 500;
     private time: number = 0;
     private threshold: number = 20;

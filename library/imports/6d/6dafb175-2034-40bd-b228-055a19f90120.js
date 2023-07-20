@@ -74,13 +74,13 @@ var LevelManager = /** @class */ (function (_super) {
     LevelManager.prototype.onLoadStage_2 = function () {
         //bay từ 2 bên sang
         for (var i = 0; i < 14; i++) {
-            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(-1000, 0, 0)), 0);
+            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_1, this.node.getWorldPosition().add(new cc.Vec3(-1000, 0, 0)), 0);
             e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
             this.list.push(e);
             e.onInit(40);
         }
         for (var i = 13; i < this.stage_2.length; i++) {
-            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(1000, 0, 0)), 0);
+            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_1, this.node.getWorldPosition().add(new cc.Vec3(1000, 0, 0)), 0);
             e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
             this.list.push(e);
             e.onInit(40);
@@ -94,11 +94,71 @@ var LevelManager = /** @class */ (function (_super) {
             e.onInit(40);
         }
     };
+    LevelManager.prototype.onLoadStage_2_2 = function () {
+        //bay từ 2 bên sang
+        for (var i = 0; i < 14; i++) {
+            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(-1000, 0, 0)), 0);
+            e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+            this.list.push(e);
+            e.onInit(40);
+        }
+        for (var i = 13; i < this.stage_2.length; i++) {
+            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(1000, 0, 0)), 0);
+            e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+            this.list.push(e);
+            e.onInit(40);
+        }
+    };
+    LevelManager.prototype.onLoadStage_3_1 = function () {
+        for (var i = 0; i < this.stage_1.length; i++) {
+            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_1, this.stage_1[i].getWorldPosition().add(cc.Vec3.UP.mul(1000)), 0);
+            e.moveTo(this.stage_1[i].getWorldPosition(), 1, true);
+            this.list.push(e);
+            e.onInit(40);
+        }
+    };
+    LevelManager.prototype.onLoadStage_3_2 = function () {
+        //bay từ 2 bên sang
+        for (var i = 0; i < 14; i++) {
+            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_1, this.node.getWorldPosition().add(new cc.Vec3(-1000, 0, 0)), 0);
+            e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+            this.list.push(e);
+            e.onInit(40);
+        }
+        for (var i = 13; i < this.stage_2.length; i++) {
+            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(1000, 0, 0)), 0);
+            e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+            this.list.push(e);
+            e.onInit(40);
+        }
+    };
+    LevelManager.prototype.onLoadStage_4_1 = function () {
+        for (var i = 0; i < this.stage_1.length; i++) {
+            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_2, this.stage_1[i].getWorldPosition().add(cc.Vec3.UP.mul(1000)), 0);
+            e.moveTo(this.stage_1[i].getWorldPosition(), 1, true);
+            this.list.push(e);
+            e.onInit(40);
+        }
+    };
+    LevelManager.prototype.onLoadStage_4_2 = function () {
+        //bay từ 2 bên sang
+        for (var i = 0; i < 14; i++) {
+            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_2, this.node.getWorldPosition().add(new cc.Vec3(-1000, 0, 0)), 0);
+            e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+            this.list.push(e);
+            e.onInit(40);
+        }
+        for (var i = 13; i < this.stage_2.length; i++) {
+            var e = SimplePool_1.default.spawnT(SimplePool_1.PoolType.Enemy_1, this.node.getWorldPosition().add(new cc.Vec3(1000, 0, 0)), 0);
+            e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
+            this.list.push(e);
+            e.onInit(40);
+        }
+    };
     LevelManager.prototype.onFinish = function () {
         //kết thúc màn game di chuyển tàu lên thẳng phía trên
         this.ship.onFinish();
         this.stage++;
-        //show UI end card
     };
     // Hàm chờ 3 giây
     LevelManager.prototype.waitAndExecute = function (callback) {
@@ -118,41 +178,35 @@ var LevelManager = /** @class */ (function (_super) {
         //nếu kết thúc stage thì next stage
         if (this.list.length == 0) {
             this.stage++;
-            if (this.stage == 3) {
-                this.level++;
-                this.stage = 0;
-            }
-            switch (this.level) {
+            switch (this.stage) {
+                case 0:
+                    this.onLoadStage_1();
+                    break;
                 case 1:
-                    switch (this.stage) {
-                        case 0:
-                            this.onLoadStage_1();
-                            break;
-                        case 1:
-                            this.onLoadStage_2();
-                            break;
-                        default:
-                            //kết thúc stage thì kết thúc game
-                            this.onFinish();
-                            this.waitAndExecute(function () { return _this.onLoadStage_2_1(); });
-                            console.log("state: " + this.stage + "; level\" " + this.level);
-                            break;
-                    }
+                    this.onLoadStage_2();
+                    break;
                 case 2:
-                    switch (this.stage) {
-                        case 0:
-                            this.onLoadStage_2_1();
-                            break;
-                        case 1:
-                            //this.onLoadStage_2();
-                            break;
-                        default:
-                            //kết thúc stage thì kết thúc game
-                            this.onFinish();
-                            break;
-                    }
+                    this.onLoadStage_2_1();
+                    break;
+                case 3:
+                    this.onLoadStage_2_2();
+                    break;
+                case 4:
+                    this.onLoadStage_3_1();
+                    break;
+                case 5:
+                    this.onLoadStage_3_2();
+                    break;
+                case 6:
+                    this.onLoadStage_4_1();
+                    break;
+                case 7:
+                    this.onLoadStage_4_2();
+                    this.waitAndExecute(function () { return _this.onFinish(); });
+                    break;
             }
         }
+        //if(this.stage>4) this.stage = 0;
         //enemy đầu tiên chết sẽ tạo booster ra
         if (!this.isBooster) {
             this.isBooster = true;

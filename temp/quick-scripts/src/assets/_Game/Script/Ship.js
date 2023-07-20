@@ -101,7 +101,7 @@ var Ship = /** @class */ (function (_super) {
     };
     Ship.prototype.onPowerUp = function () {
         this.bulletPoints = this.bulletPoints_2;
-        this.shield.active = true;
+        //this.shield.active = true;
         SoundManager_1.default.Ins.PlayClip(SoundManager_1.AudioType.FX_Booster);
     };
     Ship.prototype.onNextRound = function () {
@@ -141,7 +141,7 @@ var Ship = /** @class */ (function (_super) {
         this.moveTo(this.node.position.add(cc.Vec3.UP.mul(-200)), 1, function () { return _this.moveTo(_this.node.position.add(cc.Vec3.UP.mul(10000)), 1, 
         //show UI end card
         function () { return UIManager_1.default.Ins.onOpen(1); }, false); }, false);
-        this.waitAndExecute(function () { return _this.onNextRound(); });
+        //this.waitAndExecute(()=>this.onNextRound());
     };
     // Hàm chờ 3 giây
     Ship.prototype.waitAndExecute = function (callback) {
